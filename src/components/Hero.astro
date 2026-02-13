@@ -1,0 +1,89 @@
+---
+import ButtonPrimary from './ButtonPrimary.astro';
+import ButtonOutline from './ButtonOutline.astro';
+---
+
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-24 pb-16">
+  <div class="absolute inset-0 bg-dark-gradient"></div>
+  
+  <div class="absolute inset-0 opacity-20 pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-brand-gold/30 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-gold/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+  </div>
+
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="max-w-5xl mx-auto text-center animate-fade-in">
+      
+      <div class="inline-block mb-8">
+        <span class="px-4 py-2 bg-brand-gold/10 border border-brand-gold/30 rounded-full text-brand-gold text-sm font-medium backdrop-blur-sm tracking-widest uppercase">
+          ✨ Videos que tocan el corazón
+        </span>
+      </div>
+
+      <div class="relative inline-block mb-10">
+        <div class="absolute -inset-8 blur-3xl bg-brand-gold/10 rounded-full opacity-60"></div>
+        
+        <h1 class="relative text-7xl md:text-9xl font-serif italic font-bold tracking-tighter leading-none">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F8E79C] to-[#D4AF37] drop-shadow-sm">
+            Comparte
+          </span>
+          <br />
+          <span class="text-white font-sans font-light not-italic text-3xl md:text-6xl tracking-[0.2em] uppercase mt-4 block opacity-90">
+            Emociones Únicas
+          </span>
+        </h1>
+      </div>
+
+      <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+        La colección más exclusiva de videos motivacionales, <br/>mensajes de buenos días y dedicatorias para toda ocasión.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-5 justify-center items-center mb-16">
+        
+        <ButtonPrimary 
+          text="Ver Videos Ahora" 
+          href="/videos" 
+        >
+          <svg slot="icon" class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </ButtonPrimary>
+        
+        <ButtonOutline 
+          text="Explorar Categorías" 
+          href="#categorias" 
+        />
+        
+      </div>
+
+      <div class="grid grid-cols-3 gap-8 max-w-2xl mx-auto border-t border-white/10 pt-8">
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-serif font-bold text-brand-gold mb-1">100+</div>
+          <div class="text-xs uppercase tracking-widest text-white/50">Videos</div>
+        </div>
+        <div class="text-center border-x border-white/10">
+          <div class="text-3xl md:text-4xl font-serif font-bold text-brand-gold mb-1">20K+</div>
+          <div class="text-xs uppercase tracking-widest text-white/50">Compartidos</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-serif font-bold text-brand-gold mb-1">10+</div>
+          <div class="text-xs uppercase tracking-widest text-white/50">Categorías</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <svg class="w-6 h-6 text-brand-gold/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</section>
+
+<style>
+  @keyframes pulse {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(1.1); }
+  }
+  .delay-1000 { animation-delay: 1s; }
+</style>

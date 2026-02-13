@@ -1,0 +1,70 @@
+---
+interface Props {
+  text: string;
+  href?: string;
+  className?: string;
+}
+
+const { text, href = '#', className = '' } = Astro.props;
+---
+
+<a 
+  href={href}
+  class:list={["btn-outline", className]}
+>
+  <span class="relative z-10">{text}</span>
+</a>
+
+<style>
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 2px solid #D4AF37;
+    color: #D4AF37;
+    padding: 20px 40px;
+    font-weight: 700;
+    font-size: 1.125rem;
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.5s ease;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Ripple Effect Circle */
+  .btn-outline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: #D4AF37;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+    z-index: 0;
+  }
+
+  .btn-outline:hover::before {
+    width: 350%;
+    height: 350%;
+  }
+
+  .btn-outline:hover {
+    color: #0F0F0F; /* Diventa nero su sfondo oro */
+    border-color: #E5C158;
+  }
+
+  @media (max-width: 768px) {
+    .btn-outline {
+      padding: 16px 32px;
+      font-size: 1rem;
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+</style>

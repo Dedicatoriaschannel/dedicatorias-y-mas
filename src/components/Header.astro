@@ -1,0 +1,136 @@
+---
+const pathname = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/', label: 'Inicio' },
+  { href: '/videos', label: 'Videos' },
+  { href: '/categoria/motivacion-y-superacion', label: 'Motivación' },
+  { href: '/categoria/fe-y-esperanza', label: 'Fe' },
+  { href: '/sobre-mi', label: 'Sobre Mí' },
+];
+
+function isActive(href: string, current: string): boolean {
+  if (href === '/') return current === '/';
+  return current.startsWith(href);
+}
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="main-header">
+  <nav class="container mx-auto px-4 py-4">
+    <div class="relative backdrop-blur-lg bg-brand-black/90 border border-brand-gold/20 rounded-2xl shadow-gold px-4 py-2 flex items-center justify-center min-h-[80px] md:min-h-[100px]">
+      
+      <a href="/" class="flex items-center group z-10">
+        <img 
+          src="/logo.png" 
+          alt="Dedicatorias y Más" 
+          class="h-16 md:h-24 lg:h-28 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+        />
+      </a>
+
+      <div class="hidden lg:flex items-center gap-6 absolute right-8 top-1/2 -translate-y-1/2">
+        {navLinks.map(link => (
+          <a 
+            href={link.href}
+            class:list={[
+              "text-sm font-medium transition-all duration-300 relative group whitespace-nowrap",
+              isActive(link.href, pathname) 
+                ? "text-brand-gold" 
+                : "text-white/80 hover:text-brand-gold"
+            ]}
+          >
+            {link.label}
+            <span class:list={[
+              "absolute -bottom-1 left-0 h-0.5 bg-brand-gold transition-all duration-300",
+              isActive(link.href, pathname) ? "w-full" : "w-0 group-hover:w-full"
+            ]}></span>
+          </a>
+        ))}
+      </div>
+
+      <button 
+        class="lg:hidden text-white p-2 hover:text-brand-gold transition-colors absolute right-4 top-1/2 -translate-y-1/2"
+        id="mobile-menu-btn"
+        aria-label="Abrir menú"
+      >
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <div 
+    class="lg:hidden fixed inset-0 bg-black/95 backdrop-blur-xl z-40 opacity-0 pointer-events-none transition-opacity duration-300"
+    id="mobile-menu"
+  >
+    <div class="container mx-auto px-4 py-20 relative">
+      <button 
+        class="absolute top-6 right-6 text-white p-2 hover:text-brand-gold transition-colors"
+        id="mobile-menu-close"
+        aria-label="Cerrar menú"
+      >
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div class="flex flex-col gap-6 mt-12 items-center text-center">
+        {navLinks.map(link => (
+          <a 
+            href={link.href}
+            class:list={[
+              "text-2xl font-display font-semibold transition-all duration-300 border-b-2 border-transparent pb-2",
+              isActive(link.href, pathname) 
+                ? "text-brand-gold border-brand-gold" 
+                : "text-white/80 hover:text-brand-gold hover:border-brand-gold/50"
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const menuClose = document.getElementById('mobile-menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.remove('pointer-events-none', 'opacity-0');
+    document.body.style.overflow = 'hidden';
+  });
+
+  menuClose?.addEventListener('click', () => {
+    mobileMenu?.classList.add('pointer-events-none', 'opacity-0');
+    document.body.style.overflow = '';
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('pointer-events-none', 'opacity-0');
+      document.body.style.overflow = '';
+    });
+  });
+
+  let lastScroll = 0;
+  const header = document.getElementById('main-header');
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    if (currentScroll <= 0) {
+      header?.classList.remove('shadow-2xl');
+    } else {
+      header?.classList.add('shadow-2xl');
+    }
+    lastScroll = currentScroll;
+  });
+</script>
+
+<style>
+  nav > div {
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.98) 0%, rgba(26, 26, 26, 0.95) 100%);
+  }
+</style>
